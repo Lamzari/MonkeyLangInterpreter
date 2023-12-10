@@ -1,2 +1,21 @@
-For a list of improvements to work on search for '@Improvement' in the code
-For a list of performance improvements to work on search for '@Performance' in the code
+----------------------------------------------------------------
+codetags: (add date and time of tag, "datetime" snippet in nvim) 
+@@Improvement: generic improvements
+@@Performance: performance related improvements
+@@Consider: consider something about the below piece of code
+@@Doing: self reminder on what are you currently doing
+----------------------------------------------------------------
+
+- What to add to the readme.md file: {
+
+write small doc/explanation of:
+- what is a lexer
+- look ahead for multiple char tokens
+- what is a REPL (Read Evaluate Process Loop)
+
+*write a formal specification for the language
+  }
+
+
+
+* = maybe

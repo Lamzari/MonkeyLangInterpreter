@@ -17,6 +17,10 @@ const (
 	IDENT = "IDENT" // x, y, functionName...
 	INT   = "INT"   // 123456
 
+	// double char operators
+	EQ     = "=="
+	NOT_EQ = "!="
+
 	// operators
 	ASSIGN   = "="
 	PLUS     = "+"

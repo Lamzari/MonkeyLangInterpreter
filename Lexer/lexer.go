@@ -17,18 +17,6 @@ func New(input string) *Lexer {
 	return l
 }
 
-// @@Improvement: as of now we only support ASCII, to support unicode we should change ch to a rune type and change how we read input (each rune might be of variable length in unicode (utf-8))
-func (l *Lexer) readChar() {
-	if l.readPosition >= len(l.input) {
-		l.ch = 0 // 0 is the value for the ASCII 'NUL', in our case means either we haven't read anything or EOF
-	} else {
-		l.ch = l.input[l.readPosition]
-	}
-
-	l.position = l.readPosition
-	l.readPosition += 1
-}
-
 func (l *Lexer) NextToken() token.Token {
 	var tok token.Token
 
@@ -36,13 +24,27 @@ func (l *Lexer) NextToken() token.Token {
 
 	switch l.ch {
 	case '=':
-		tok = newToken(token.ASSIGN, l.ch)
+		// Handle == (equals)
+		if l.peekChar() == '=' {
+			tok.Type = token.EQ
+			tok.Literal = "=="
+			l.readChar()
+		} else {
+			tok = newToken(token.ASSIGN, l.ch)
+		}
 	case '+':
 		tok = newToken(token.PLUS, l.ch)
 	case '-':
 		tok = newToken(token.MINUS, l.ch)
 	case '!':
-		tok = newToken(token.BANG, l.ch)
+		// Handle != (not equals)
+		if l.peekChar() == '=' {
+			l.readChar()
+			tok.Type = token.NOT_EQ
+			tok.Literal = "!="
+		} else {
+			tok = newToken(token.BANG, l.ch)
+		}
 	case '*':
 		tok = newToken(token.ASTERISK, l.ch)
 	case '/':
@@ -82,6 +84,27 @@ func (l *Lexer) NextToken() token.Token {
 
 	l.readChar()
 	return tok
+}
+
+// @@Improvement: as of now we only support ASCII, to support unicode we should change ch to a rune type and change how we read input (each rune might be of variable length in unicode (utf-8))
+func (l *Lexer) peekChar() byte {
+	if l.readPosition >= len(l.input) {
+		return 0 // 0 is the value for the ASCII 'NUL', in our case means either we haven't read anything or EOF
+	} else {
+		return l.input[l.readPosition]
+	}
+}
+
+// @@Improvement: as of now we only support ASCII, to support unicode we should change ch to a rune type and change how we read input (each rune might be of variable length in unicode (utf-8))
+func (l *Lexer) readChar() {
+	if l.readPosition >= len(l.input) {
+		l.ch = 0 // 0 is the value for the ASCII 'NUL', in our case means either we haven't read anything or EOF
+	} else {
+		l.ch = l.input[l.readPosition]
+	}
+
+	l.position = l.readPosition
+	l.readPosition += 1
 }
 
 func (l *Lexer) readNumber() string {

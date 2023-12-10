@@ -17,7 +17,7 @@ func New(input string) *Lexer {
 	return l
 }
 
-// @Improvement: as of now we only support ASCII, to support unicode we should change ch to a rune type and change how we read input (each rune might be of variable length in unicode (utf-8))
+// @@Improvement: as of now we only support ASCII, to support unicode we should change ch to a rune type and change how we read input (each rune might be of variable length in unicode (utf-8))
 func (l *Lexer) readChar() {
 	if l.readPosition >= len(l.input) {
 		l.ch = 0 // 0 is the value for the ASCII 'NUL', in our case means either we haven't read anything or EOF

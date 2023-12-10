@@ -87,6 +87,7 @@ func (l *Lexer) NextToken() token.Token {
 }
 
 // @@Improvement: as of now we only support ASCII, to support unicode we should change ch to a rune type and change how we read input (each rune might be of variable length in unicode (utf-8))
+// @@Consider: add a version with number of chars of look ahead and refactor main switch, now we're only managing 2 double char tokens
 func (l *Lexer) peekChar() byte {
 	if l.readPosition >= len(l.input) {
 		return 0 // 0 is the value for the ASCII 'NUL', in our case means either we haven't read anything or EOF

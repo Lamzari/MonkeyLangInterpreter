@@ -42,7 +42,7 @@ const (
 	RSQUIRLY = "}"
 
 	// keywords
-	FUNCTION = "FUNTCTION"
+	FUNCTION = "FUNCTION"
 	LET      = "LET"
 	TRUE     = "TRUE"
 	FALSE    = "FALSE"
